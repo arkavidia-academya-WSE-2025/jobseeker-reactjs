@@ -1,6 +1,7 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import Home from "./components/pages/home/Home";
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
           <Navbar />
 
           {/* Routing */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
 
           {/* Footer Section */}
           <Footer />
