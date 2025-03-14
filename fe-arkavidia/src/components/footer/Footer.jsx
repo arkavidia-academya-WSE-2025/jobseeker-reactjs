@@ -16,7 +16,7 @@ const Footer = () => {
               className="text-4xl text-sky-500 font-bold mr-16 flex items-center"
             >
               <GiPortal />
-              portal
+              JobSync
             </Link>
             <div className="space-y-6">
               <p className="text-sm text-neutral-500 font-normal">
@@ -29,21 +29,21 @@ const Footer = () => {
               </p>
               <div className="flex items-center gap-5 w-full">
                 <Link
-                  to="https://www.instagram.com/gtech.official08/"
+                  to=""
                   target="_blank"
                   className="w-10 h-10 rounded-full bg-sky-500/10 flex items-center justify-center hover:bg-sky-500/20 ease-in-out duration-300"
                 >
                   <FaInstagram className="text-sky-500 text-lg" />
                 </Link>
                 <Link
-                  to="https://www.youtube.com/@g-techofficial"
+                  to=""
                   target="_blank"
                   className="w-10 h-10 rounded-full bg-sky-500/10 flex items-center justify-center hover:bg-sky-500/20 ease-in-out duration-300"
                 >
                   <FaYoutube className="text-sky-500 text-lg" />
                 </Link>
                 <Link
-                  to="https://www.youtube.com/@g-techofficial"
+                  to=""
                   target="_blank"
                   className="w-10 h-10 rounded-full bg-sky-500/10 flex items-center justify-center hover:bg-sky-500/20 ease-in-out duration-300"
                 >
@@ -183,10 +183,10 @@ const Footer = () => {
           <p className="text-sm text-neutral-500/80 font-normal">
             Designed and Developed by
             <Link
-              to="https://github.com/gtech.official08"
+              to="https://github.com/arkavidia-academya-WSE-2025/jobseeker-reactjs"
               className="text-sky-500 hover:text-sky-600 ease-in-out duration-300 ml-2"
             >
-              G-Tech Official
+              Group 5
             </Link>
           </p>
         </div>
