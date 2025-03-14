@@ -16,7 +16,7 @@ const Footer = () => {
               className="text-4xl text-sky-500 font-bold mr-16 flex items-center"
             >
               <GiPortal />
-              portal
+              JobSync
             </Link>
             <div className="space-y-6">
               <p className="text-sm text-neutral-500 font-normal">

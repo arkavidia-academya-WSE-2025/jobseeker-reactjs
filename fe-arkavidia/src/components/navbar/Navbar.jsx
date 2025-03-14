@@ -31,7 +31,7 @@ const Navbar = () => {
           className="text-2xl text-sky-500 font-bold mr-16 flex items-center"
         >
           <GiPortal />
-          portal
+          JobSync
         </Link>
 
         {/* Toggle button */}
