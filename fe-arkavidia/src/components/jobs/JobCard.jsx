@@ -45,12 +45,12 @@ const JobCard = ({
               </Link>
               <p className="text-sm text-sky-700">{companyName}</p>
             </div>
-            <Link
+            {/* <Link
               to="/"
               className="w-9 h-9 rounded-full bg-sky-500/10 flex items-center justify-center hover:bg-sky-500/10 ease-in-out duration-300"
             >
               <IoMdHeartEmpty className="text-sky-500 text-2x1 pt-0.5" />
-            </Link>
+            </Link> */}
           </div>
           <div className="space-y-2">
             <div className="flex items-center gap-x-4 gap-y-1 flex-wrap">
