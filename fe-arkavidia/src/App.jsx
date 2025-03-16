@@ -4,6 +4,7 @@ import Footer from "./components/footer/Footer";
 import Home from "./components/pages/home/Home";
 import Chat from "./components/pages/chat/Chat";
 import NotificationPage from "./components/pages/notifications/NotificationPage";
+import JobSearch from "./components/pages/home/jobs/JobSearch";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/notification" element={<NotificationPage />} />
+            <Route path="/findJobs" element={<JobSearch />} />
           </Routes>
 
           {/* Footer Section */}

@@ -10,7 +10,7 @@ const Navbar = () => {
   const [showNotifications, setShowNotifications] = React.useState(false);
 
   const navLinks = [
-    { href: "/", label: "Find Jobs" },
+    { href: "/findJobs", label: "Find Jobs" },
     { href: "/companies", label: "Companies" },
     { href: "/dashboard", label: "Dashboard" },
   ];
