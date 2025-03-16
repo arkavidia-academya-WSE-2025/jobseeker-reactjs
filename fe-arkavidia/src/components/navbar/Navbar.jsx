@@ -3,9 +3,11 @@ import { FaBars } from "react-icons/fa6";
 import { LiaTimesSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import { GiPortal } from "react-icons/gi";
+import { IoNotificationsOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
+  const [showNotifications, setShowNotifications] = React.useState(false);
 
   const navLinks = [
     { href: "/", label: "Find Jobs" },
@@ -66,8 +68,38 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <div className="flex md:items-center sm:items-start items-start gap-x-5 gap-y-2 flex-wrap md:flex-row sm:flex-col flex-col text-base font-medium text-neutral-50">
-            <button className="w-fit px-6 py-2 rounded-full bg-sky-500 hover:bg-sky-600 ease-in-out duration-300">
+          <div className="flex items-center gap-x-5 relative">
+            {/* Notification Icon */}
+            <button
+              className="text-neutral-600 hover:text-sky-500 relative"
+              onClick={() => setShowNotifications(!showNotifications)}
+            >
+              <IoNotificationsOutline className="text-2xl" />
+              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                3
+              </span>
+            </button>
+
+            {/* Notification Dropdown */}
+            {showNotifications && (
+              <div className="absolute top-10 right-0 w-64 bg-white shadow-md border border-neutral-200 rounded-md p-3">
+                <p className="text-sm text-neutral-500">Newest Notification</p>
+                <ul className="mt-2 text-sm text-neutral-700">
+                  <li className="p-2 border-b">New job posted</li>
+                  <li className="p-2 border-b">Company viewed your profile</li>
+                  <li className="p-2 border-b">Interview scheduled</li>
+                </ul>
+                <Link
+                  to="/notification"
+                  className="block text-center text-sky-500 hover:text-sky-600 text-sm mt-2"
+                >
+                  View More
+                </Link>
+              </div>
+            )}
+
+            {/* Sign In Button */}
+            <button className="px-6 py-2 rounded-full bg-sky-500 hover:bg-sky-600 text-white ease-in-out duration-300">
               Sign In
             </button>
           </div>
