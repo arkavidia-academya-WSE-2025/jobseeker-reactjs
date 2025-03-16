@@ -1,5 +1,7 @@
 import React from "react";
 import Hero from "./hero/Hero";
+import NearbyJobs from "./nearbyjobs/NearbyJobs";
+import Jobs from "./jobs/Jobs";
 
 const Home = () => {
   return (
@@ -7,8 +9,9 @@ const Home = () => {
       {/*Hero Section */}
       <Hero />
       {/*Nearby Job Section*/}
-
+      <NearbyJobs />
       {/*Jobs*/}
+      <Jobs />
     </div>
   );
 };
