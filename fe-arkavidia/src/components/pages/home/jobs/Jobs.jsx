@@ -34,11 +34,11 @@ const Jobs = () => {
                 companyImg={ReactLogo}
                 jobTitle={"Senior UI/Ux Designer"}
                 companyName={"React Company"}
-                jobLocation={"Indonesian - East Java"}
-                jobType={"WFO"}
-                jobTime={"Full Time"}
-                salary={"$70k"}
-                dateDuration={"5th Sept - 10th Sept"}
+                // jobLocation={"Indonesian - East Java"}
+                // jobType={"WFO"}
+                // jobTime={"Full Time"}
+                // salary={"$70k"}
+                // dateDuration={"5th Sept - 10th Sept"}
                 jobDesc={
                   "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum"
                 }
@@ -47,11 +47,11 @@ const Jobs = () => {
                 companyImg={ReactLogo}
                 jobTitle={"Senior UI/Ux Designer"}
                 companyName={"React Company"}
-                jobLocation={"Indonesian - East Java"}
-                jobType={"WFO"}
-                jobTime={"Full Time"}
-                salary={"$70k"}
-                dateDuration={"5th Sept - 10th Sept"}
+                // jobLocation={"Indonesian - East Java"}
+                // jobType={"WFO"}
+                // jobTime={"Full Time"}
+                // salary={"$70k"}
+                // dateDuration={"5th Sept - 10th Sept"}
                 jobDesc={
                   "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum"
                 }
@@ -60,11 +60,11 @@ const Jobs = () => {
                 companyImg={ReactLogo}
                 jobTitle={"Senior UI/Ux Designer"}
                 companyName={"React Company"}
-                jobLocation={"Indonesian - East Java"}
-                jobType={"WFO"}
-                jobTime={"Full Time"}
-                salary={"$70k"}
-                dateDuration={"5th Sept - 10th Sept"}
+                // jobLocation={"Indonesian - East Java"}
+                // jobType={"WFO"}
+                // jobTime={"Full Time"}
+                // salary={"$70k"}
+                // dateDuration={"5th Sept - 10th Sept"}
                 jobDesc={
                   "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum"
                 }
@@ -73,11 +73,11 @@ const Jobs = () => {
                 companyImg={ReactLogo}
                 jobTitle={"Senior UI/Ux Designer"}
                 companyName={"React Company"}
-                jobLocation={"Indonesian - East Java"}
-                jobType={"WFO"}
-                jobTime={"Full Time"}
-                salary={"$70k"}
-                dateDuration={"5th Sept - 10th Sept"}
+                // jobLocation={"Indonesian - East Java"}
+                // jobType={"WFO"}
+                // jobTime={"Full Time"}
+                // salary={"$70k"}
+                // dateDuration={"5th Sept - 10th Sept"}
                 jobDesc={
                   "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum"
                 }
@@ -86,11 +86,11 @@ const Jobs = () => {
                 companyImg={ReactLogo}
                 jobTitle={"Senior UI/Ux Designer"}
                 companyName={"React Company"}
-                jobLocation={"Indonesian - East Java"}
-                jobType={"WFO"}
-                jobTime={"Full Time"}
-                salary={"$70k"}
-                dateDuration={"5th Sept - 10th Sept"}
+                // jobLocation={"Indonesian - East Java"}
+                // jobType={"WFO"}
+                // jobTime={"Full Time"}
+                // salary={"$70k"}
+                // dateDuration={"5th Sept - 10th Sept"}
                 jobDesc={
                   "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum"
                 }

@@ -13,11 +13,11 @@ const JobCard = ({
   companyImg,
   jobTitle,
   companyName,
-  jobLocation,
-  jobType,
-  jobTime,
-  salary,
-  dateDuration,
+  // jobLocation,
+  // jobType,
+  // jobTime,
+  // salary,
+  // dateDuration,
   jobDesc,
 }) => {
   return (
@@ -52,7 +52,7 @@ const JobCard = ({
               <IoMdHeartEmpty className="text-sky-500 text-2x1 pt-0.5" />
             </Link> */}
           </div>
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <div className="flex items-center gap-x-4 gap-y-1 flex-wrap">
               <div className="flex items-center gap-x-1 text-sm">
                 <IoLocationSharp className="text-neutral-400" />
@@ -80,13 +80,14 @@ const JobCard = ({
                 <p className="text-xs text-neutral-400">{dateDuration}</p>
               </div>
             </div>
-          </div>
+          </div> */}
           <p className="text-sm text-neutral-500 line-clamp-2">{jobDesc}</p>
         </div>
 
         {/* Tags and Buttons*/}
-        <div className="w-full flex items-center justify-between gap-5 flex-wrap">
-          <div className="flex items-center gap-3 flex-wrap">
+        <div className="w-full flex items-center justify-end">
+          {/* <div className="w-full flex items-center justify-between gap-5 flex-wrap"> */}
+          {/* <div className="flex items-center gap-3 flex-wrap">
             <Link
               to="/"
               className="text-sm text-sky-500 bg-sky-500/10 rounded-full px-2 py-0.5"
@@ -111,8 +112,8 @@ const JobCard = ({
             >
               Adobe IL
             </Link>
-          </div>
-          <button className="md:w-fit w-full px-5 py-2 rounded-full bg-sky-500 hover:bg-sky-600 text-sm text-neutral-50 font-normal flex items-center justify-center gap-x-2 ease-in-out duration-300">
+          </div> */}
+          <button className="px-5 py-2 rounded-full bg-sky-500 hover:bg-sky-600 text-sm text-neutral-50 font-normal flex items-center justify-center gap-x-2 ease-in-out duration-300">
             Apply Now
           </button>
         </div>

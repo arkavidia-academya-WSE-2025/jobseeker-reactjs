@@ -56,7 +56,7 @@ const NearbyJobs = () => {
 
               {/* Tags and Buttons*/}
               <div className="w-full flex items-center justify-between gap-5 flex-wrap">
-                <div className="flex items-center gap-3 flex-wrap">
+                {/* <div className="flex items-center gap-3 flex-wrap">
                   <Link
                     to="/"
                     className="text-sm text-sky-500 bg-sky-500/10 rounded-full px-2 py-0.5"
@@ -75,7 +75,7 @@ const NearbyJobs = () => {
                   >
                     Canvas
                   </Link>
-                </div>
+                </div> */}
                 <button className="md:w-fit w-full px-5 py-2 rounded-full bg-sky-500 hover:bg-sky-600 text-sm text-neutral-50 font-normal flex items-center justify-center gap-x-2 ease-in-out duration-300">
                   View Details
                 </button>
@@ -121,7 +121,7 @@ const NearbyJobs = () => {
 
               {/* Tags and Buttons*/}
               <div className="w-full flex items-center justify-between gap-5 flex-wrap">
-                <div className="flex items-center gap-3 flex-wrap">
+                {/* <div className="flex items-center gap-3 flex-wrap">
                   <Link
                     to="/"
                     className="text-sm text-sky-500 bg-sky-500/10 rounded-full px-2 py-0.5"
@@ -140,7 +140,7 @@ const NearbyJobs = () => {
                   >
                     Canvas
                   </Link>
-                </div>
+                </div> */}
                 <button className="md:w-fit w-full px-5 py-2 rounded-full bg-sky-500 hover:bg-sky-600 text-sm text-neutral-50 font-normal flex items-center justify-center gap-x-2 ease-in-out duration-300">
                   View Details
                 </button>
