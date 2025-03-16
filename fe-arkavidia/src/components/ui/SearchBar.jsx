@@ -7,7 +7,7 @@ const SearchBar = ({ searchTerm, onSearchChange, onSearchSubmit }) => {
         type="text"
         value={searchTerm}
         onChange={onSearchChange}
-        placeholder="Cari lowongan..."
+        placeholder="Front-End Developer, Back-End Developer..."
         className="flex-grow p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
       <button

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import SearchBar from "../../../ui/SearchBar";
 import FilterPanel from "../../../ui/FilterPanel";
-import JobCard from "../../../jobs/JobCard";
+import JobCards from "./JobCards";
 
 const JobSearch = () => {
   // State untuk pencarian dan filter
@@ -91,10 +91,12 @@ const JobSearch = () => {
     return b.id - a.id;
   });
 
+  console.log("sortedJobs:", sortedJobs);
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow">
-        <h2 className="text-2xl font-bold mb-4">Pencarian Lowongan</h2>
+        <h2 className="text-2xl font-bold mb-4">Search Jobs</h2>
         <div className="mb-4">
           <SearchBar
             searchTerm={searchTerm}
@@ -112,17 +114,16 @@ const JobSearch = () => {
         </div>
         <div className="grid grid-cols-1 gap-4">
           {sortedJobs.map((job) => (
-            <JobCard
+            <JobCards
               key={job.id}
               job={job}
               onViewDetail={handleViewDetail}
               onApply={handleApply}
             />
           ))}
+
           {sortedJobs.length === 0 && (
-            <p className="text-center text-gray-500">
-              Tidak ada lowongan yang ditemukan.
-            </p>
+            <p className="text-center text-gray-500">Sorry! no jobs found.</p>
           )}
         </div>
       </div>

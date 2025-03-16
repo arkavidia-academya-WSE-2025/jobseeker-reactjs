@@ -11,36 +11,36 @@ const FilterPanel = ({ sortOption, onSortChange, filters, onFilterChange }) => {
           onChange={onSortChange}
           className="p-2 border border-gray-300 rounded"
         >
-          <option value="latest">Terbaru</option>
-          <option value="oldest">Terlama</option>
-          <option value="popular">Paling populer</option>
+          <option value="latest">Newest</option>
+          <option value="oldest">Longest</option>
+          <option value="popular">Populer</option>
         </select>
       </div>
       {/* Filter Lokasi */}
       <div className="flex items-center">
-        <label className="mr-2">Lokasi:</label>
+        <label className="mr-2">Location:</label>
         <input
           type="text"
           name="location"
           value={filters.location}
           onChange={onFilterChange}
-          placeholder="Lokasi..."
+          placeholder="Jakarta..."
           className="p-2 border border-gray-300 rounded"
         />
       </div>
       {/* Filter Kategori */}
       <div className="flex items-center">
-        <label className="mr-2">Kategori:</label>
+        <label className="mr-2">Category:</label>
         <select
           name="category"
           value={filters.category}
           onChange={onFilterChange}
           className="p-2 border border-gray-300 rounded"
         >
-          <option value="">Semua</option>
+          <option value="">All</option>
           <option value="it">IT</option>
-          <option value="marketing">Marketing</option>
-          <option value="finance">Keuangan</option>
+          <option value="marketing">AI Engineer</option>
+          <option value="finance">Accountant</option>
         </select>
       </div>
     </div>
