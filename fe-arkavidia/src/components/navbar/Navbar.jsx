@@ -69,7 +69,7 @@ const Navbar = () => {
 
           <div className="flex md:items-center sm:items-start items-start gap-x-5 gap-y-2 flex-wrap md:flex-row sm:flex-col flex-col text-base font-medium text-neutral-50">
             <button className="w-fit px-6 py-2 rounded-full bg-sky-500 hover:bg-sky-600 ease-in-out duration-300">
-              Sign Up
+              Sign In
             </button>
           </div>
         </div>
