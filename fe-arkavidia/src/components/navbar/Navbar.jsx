@@ -10,8 +10,7 @@ const Navbar = () => {
   const navLinks = [
     { href: "/", label: "Find Jobs" },
     { href: "/companies", label: "Companies" },
-    { href: "/saved-jobs", label: "Saved jobs" },
-    { href: "/blog", label: "Blog" },
+    { href: "/dashboard", label: "Dashboard" },
   ];
 
   const handleClick = () => {
