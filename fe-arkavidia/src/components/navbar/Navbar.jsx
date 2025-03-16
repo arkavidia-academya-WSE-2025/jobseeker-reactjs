@@ -83,7 +83,7 @@ const Navbar = () => {
             {/* Notification Dropdown */}
             {showNotifications && (
               <div className="absolute top-10 right-0 w-64 bg-white shadow-md border border-neutral-200 rounded-md p-3">
-                <p className="text-sm text-neutral-500">Newest Notification</p>
+                <p className="text-sm text-neutral-500">Newest Notifications</p>
                 <ul className="mt-2 text-sm text-neutral-700">
                   <li className="p-2 border-b">New job posted</li>
                   <li className="p-2 border-b">Company viewed your profile</li>
