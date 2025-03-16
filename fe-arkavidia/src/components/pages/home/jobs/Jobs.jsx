@@ -23,10 +23,6 @@ const Jobs = () => {
           <div className="md:w-1/3 w-full bg-sky-500/15 rounded-xl p-6 space-y-5 md:sticky relative md:top-5 top-0">
             <div className="w-full flex items-center justify-between border-b border-neutral-400/50 pb-5">
               <h1 className="text-x1 font-bold text-sky-600">Trending Tags</h1>
-              <button className="w-fit px-4 py-1 5 text-base text-sky-500 font-medium rounded-lg border border-sky-500 hover:border-sky-600 flex items-center gap-x-2 ease-in-out duration-300">
-                <FaSliders className="text-sm" />
-                Filters
-              </button>
             </div>
             {/* Search Topics Section*/}
             <Topics />
