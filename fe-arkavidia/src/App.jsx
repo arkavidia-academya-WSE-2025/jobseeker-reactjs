@@ -5,6 +5,9 @@ import Home from "./components/pages/home/Home";
 import Chat from "./components/pages/chat/Chat";
 import NotificationPage from "./components/pages/notifications/NotificationPage";
 import JobSearch from "./components/pages/home/jobs/JobSearch";
+import LoginPage from "./components/pages/auth/LoginPage";
+import SignUpPage from "./components/pages/auth/SignUpPage";
+import ProfilePage from "./components/pages/ProfilePage";
 
 function App() {
   return (
@@ -16,10 +19,13 @@ function App() {
 
           {/* Routing */}
           <Routes>
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<Home />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/findJobs" element={<JobSearch />} />
+            <Route path="/profile:/username" element={<ProfilePage />} />
           </Routes>
 
           {/* Footer Section */}
