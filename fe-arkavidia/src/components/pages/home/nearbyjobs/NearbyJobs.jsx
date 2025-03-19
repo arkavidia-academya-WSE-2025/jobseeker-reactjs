@@ -10,7 +10,7 @@ const NearbyJobs = () => {
       <Layout className="w-full space-y-12 flex items-center justify-center flex-col">
         {/* Top Section */}
         <TopTag
-          title={"Nearby Jobs"}
+          title={"Jobs Suits"}
           desc={"System found jobs according to your interest"}
         />
 
