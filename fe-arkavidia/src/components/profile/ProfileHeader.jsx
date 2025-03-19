@@ -1,4 +1,4 @@
-// import { Camera, MapPin, UserCheck, UserPlus, X } from "lucide-react";
+import { Camera, MapPin, UserPlus, X } from "lucide-react";
 
 const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 	const renderConnectionButton = () => {

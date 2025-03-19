@@ -8,6 +8,7 @@ import JobSearch from "./components/pages/home/jobs/JobSearch";
 import LoginPage from "./components/pages/auth/LoginPage";
 import SignUpPage from "./components/pages/auth/SignUpPage";
 import ProfilePage from "./components/profile/ProfilePage";
+import PostPage from "./components/pages/feeds/PostPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/findJobs" element={<JobSearch />} />
             <Route path="/profile:/username" element={<ProfilePage />} />
+            <Route path="/feeds" element={<PostPage/>} />
           </Routes>
 
           {/* Footer Section */}
