@@ -14,7 +14,7 @@ const Hero = () => {
           </h1>
 
           <p className="text-neutral-400 text-sm md:text-lg lg:text-1xl font-normal">
-            Search Over 200+ categories of jobs and companies in one place.
+            Search Over 200+ jobs and companies in one place.
           </p>
         </div>
 
