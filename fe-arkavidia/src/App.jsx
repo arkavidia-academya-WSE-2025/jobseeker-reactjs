@@ -7,7 +7,7 @@ import NotificationPage from "./components/pages/notifications/NotificationPage"
 import JobSearch from "./components/pages/home/jobs/JobSearch";
 import LoginPage from "./components/pages/auth/LoginPage";
 import SignUpPage from "./components/pages/auth/SignUpPage";
-import ProfilePage from "./components/pages/ProfilePage";
+import ProfilePage from "./components/profile/ProfilePage";
 
 function App() {
   return (
