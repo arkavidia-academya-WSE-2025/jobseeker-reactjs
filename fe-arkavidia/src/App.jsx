@@ -7,6 +7,7 @@ import NotificationPage from "./components/pages/notifications/NotificationPage"
 import JobSearch from "./components/pages/home/jobs/JobSearch";
 import JobPostingForm from "./components/jobs/JobPosting/JobPostingForm";
 import JobApplicantsList from "./components/jobs/JobApplicants/JobApplicantsList";
+import LoginPage from "./components/pages/auth/LoginPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 
           {/* Routing */}
           <Routes>
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<Home />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/notification" element={<NotificationPage />} />
