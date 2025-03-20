@@ -14,7 +14,7 @@ const Jobs = () => {
         {/* Top Section*/}
         <TopTag
           title={"Top Trending Jobs"}
-          desc={"Apply filter to find jobs according to your requirements"}
+          desc={"Lorem Ipsum Ipsum Lorem Lorem Ipsum Lorem Ipsum"}
         />
 
         {/* Job Section*/}
