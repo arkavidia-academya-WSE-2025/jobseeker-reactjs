@@ -48,16 +48,19 @@ const Chat = () => {
           </div>
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-            {[...Array(20)].map((_, i) => (
-              <div key={i} className="flex justify-start">
-                <div className="bg-white p-3 rounded-lg shadow-sm max-w-[70%]">
-                  <p className="text-sm">Message {i + 1}</p>
-                  <span className="text-[10px] text-gray-400 mt-1">
-                    9:59 AM
-                  </span>
+            {[...Array(20)].map((_, i) => {
+              const is_read = i % 2 === 0;
+              return (
+                <div key={i} className="flex justify-start">
+                  <div className="bg-white p-3 rounded-lg shadow-sm max-w-[70%]">
+                    <p className="text-sm">Message {i + 1}</p>
+                    <span className="text-[10px] text-gray-400 mt-1">
+                      9:59 AM {is_read ? "✔✔" : "✔"}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           {/* Message Input */}
           <div className="h-[80px] p-4 border-t border-gray-200">

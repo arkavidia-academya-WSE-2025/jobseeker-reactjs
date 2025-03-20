@@ -5,6 +5,8 @@ import Home from "./components/pages/home/Home";
 import Chat from "./components/pages/chat/Chat";
 import NotificationPage from "./components/pages/notifications/NotificationPage";
 import JobSearch from "./components/pages/home/jobs/JobSearch";
+import JobPostingForm from "./components/jobs/JobPosting/JobPostingForm";
+import JobApplicantsList from "./components/jobs/JobApplicants/JobApplicantsList";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/findJobs" element={<JobSearch />} />
+            <Route path="/jobPosting" element={<JobPostingForm />} />
+            <Route path="/jobApplicants" element={<JobApplicantsList />} />
           </Routes>
 
           {/* Footer Section */}
