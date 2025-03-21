@@ -33,8 +33,19 @@ const LoginPage = () => {
       }
       localStorage.setItem("authToken", token);
 
-      // 2. Ambil data profile minimal (dari jobseeker)
-      const profileResponse = await apiClient.get("/api/profile/jobseeker");
+      let profileResponse;
+      try {
+        // 2a. Coba ambil data profile minimal dari endpoint jobseeker
+        profileResponse = await apiClient.get("/api/profile/jobseeker");
+      } catch (err) {
+        // Jika gagal dengan 403, asumsikan akun recruiter dan gunakan endpoint company
+        if (err.response && err.response.status === 403) {
+          profileResponse = await apiClient.get("/api/profile/company");
+        } else {
+          throw err;
+        }
+      }
+
       const { user_id } = profileResponse.data.data;
 
       // 3. Ambil data lengkap user (termasuk role) menggunakan user_id
