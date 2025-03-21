@@ -5,7 +5,6 @@ const apiClient = axios.create({
   timeout: 1000,
 });
 
-// Optional: Add a method for making GET requests
 export const fetchData = async (endpoint) => {
   try {
     const response = await apiClient.get(endpoint);
