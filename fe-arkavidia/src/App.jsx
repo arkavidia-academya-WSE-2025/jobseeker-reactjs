@@ -24,17 +24,15 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
-          {/* Semua route privat */}
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/editProfile" element={<EditProfile />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/notification" element={<NotificationPage />} />
-            <Route path="/findJobs" element={<JobPostingForm />} />
+            <Route path="/findJobs" element={<JobSearch />} />
             <Route path="/jobApplicants" element={<JobApplicantsList />} />
-            {/* Route khusus recruiter */}
             <Route element={<RecruiterRoute />}>
-              <Route path="/jobPosting" element={<JobSearch />} />
+              <Route path="/jobPosting" element={<JobPostingForm />} />
             </Route>
           </Route>
         </Routes>
