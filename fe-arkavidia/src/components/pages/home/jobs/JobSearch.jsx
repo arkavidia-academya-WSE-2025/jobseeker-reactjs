@@ -13,9 +13,22 @@ const JobSearch = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const [showModal, setShowModal] = useState(false);
+  const [showDetailModal, setShowDetailModal] = useState(false);
   const [jobDetail, setJobDetail] = useState(null);
   const [modalError, setModalError] = useState("");
+
+  const [showApplyModal, setShowApplyModal] = useState(false);
+  const [applicationForm, setApplicationForm] = useState({
+    full_name: "",
+    address: "",
+    cv_path: "",
+    job_id: "",
+  });
+  const [isSubmittingApplication, setIsSubmittingApplication] = useState(false);
+  const [applyError, setApplyError] = useState("");
+
+  const userData = JSON.parse(localStorage.getItem("userData")) || {};
+  const isJobSeeker = userData.role === "job_seeker";
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -66,26 +79,79 @@ const JobSearch = () => {
       setIsLoading(false);
     }
   };
+
   const handleViewDetail = async (job) => {
     try {
       const response = await apiClient.get(`/api/jobs/${job.id}`);
       setJobDetail(response.data.data);
-      setShowModal(true);
+      setShowDetailModal(true);
       setModalError("");
     } catch (err) {
       console.error("Error fetching job detail:", err);
       setModalError("Gagal mengambil detail lowongan.");
-      setShowModal(true);
+      setShowDetailModal(true);
     }
   };
 
-  const handleApply = (job) => {
-    console.log("Apply for job:", job);
+  const handleOpenApplyModal = (job) => {
+    if (!isJobSeeker) return;
+    setApplicationForm({
+      full_name: "",
+      address: "",
+      cv_path: "",
+      job_id: job.id,
+    });
+    setShowApplyModal(true);
+    setApplyError("");
   };
 
-  const closeModal = () => {
-    setShowModal(false);
+  const handleApplicationInputChange = (e) => {
+    const { name, value } = e.target;
+    setApplicationForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleApplicationSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmittingApplication(true);
+    setApplyError("");
+    try {
+      const token = localStorage.getItem("authToken");
+      const response = await apiClient.post(
+        "/api/applications",
+        {
+          full_name: applicationForm.full_name,
+          address: applicationForm.address,
+          cv_path: applicationForm.cv_path,
+          job_id: applicationForm.job_id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      );
+      console.log("Application submitted:", response.data.data);
+      setShowApplyModal(false);
+    } catch (err) {
+      console.error("Error submitting application:", err);
+      setApplyError("Gagal mengirim aplikasi.");
+    } finally {
+      setIsSubmittingApplication(false);
+    }
+  };
+
+  const closeDetailModal = () => {
+    setShowDetailModal(false);
     setJobDetail(null);
+  };
+
+  const closeApplyModal = () => {
+    setShowApplyModal(false);
+    setApplicationForm((prev) => ({ ...prev, job_id: "" }));
   };
 
   useEffect(() => {
@@ -122,7 +188,7 @@ const JobSearch = () => {
                 key={job.id}
                 job={job}
                 onViewDetail={handleViewDetail}
-                onApply={handleApply}
+                onApply={isJobSeeker ? () => handleOpenApplyModal(job) : null}
               />
             ))}
           </div>
@@ -136,11 +202,12 @@ const JobSearch = () => {
           </div>
         )}
       </div>
-      {showModal && (
+
+      {showDetailModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-2xl relative">
             <button
-              onClick={closeModal}
+              onClick={closeDetailModal}
               className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
             >
               &times;
@@ -188,6 +255,72 @@ const JobSearch = () => {
             ) : (
               <p>Loading job detail...</p>
             )}
+          </div>
+        </div>
+      )}
+
+      {showApplyModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+            <button
+              onClick={closeApplyModal}
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+            >
+              &times;
+            </button>
+            <h2 className="text-2xl font-bold mb-4">Apply for Job</h2>
+            {applyError && <p className="text-red-500 mb-2">{applyError}</p>}
+            <form onSubmit={handleApplicationSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="full_name"
+                  value={applicationForm.full_name}
+                  onChange={handleApplicationInputChange}
+                  className="w-full px-3 py-2 border rounded-md"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Address
+                </label>
+                <input
+                  type="text"
+                  name="address"
+                  value={applicationForm.address}
+                  onChange={handleApplicationInputChange}
+                  className="w-full px-3 py-2 border rounded-md"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  CV Path
+                </label>
+                <input
+                  type="text"
+                  name="cv_path"
+                  value={applicationForm.cv_path}
+                  onChange={handleApplicationInputChange}
+                  placeholder="Link or file name"
+                  className="w-full px-3 py-2 border rounded-md"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmittingApplication}
+                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                {isSubmittingApplication
+                  ? "Submitting..."
+                  : "Submit Application"}
+              </button>
+            </form>
           </div>
         </div>
       )}
