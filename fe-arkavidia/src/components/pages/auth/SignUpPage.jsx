@@ -15,7 +15,6 @@ const SignUpPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Animated Background Elements */}
       <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse"></div>
       <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse"></div>
 
@@ -28,7 +27,6 @@ const SignUpPage = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Role Selection */}
           <div className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
             <label className="block text-gray-700 mb-2 font-medium">
               Register as:
@@ -60,8 +58,6 @@ const SignUpPage = () => {
               </label>
             </div>
           </div>
-
-          {/* Input Fields */}
           <div className="space-y-4">
             <div>
               <label
@@ -135,8 +131,6 @@ const SignUpPage = () => {
               />
             </div>
           </div>
-
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-lg"

@@ -12,7 +12,6 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Animated Background Elements */}
       <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse"></div>
       <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse"></div>
 
@@ -25,7 +24,6 @@ const LoginPage = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Email Input */}
           <div>
             <label
               htmlFor="email"
@@ -43,8 +41,6 @@ const LoginPage = () => {
               required
             />
           </div>
-
-          {/* Password Input */}
           <div>
             <div className="flex justify-between mb-2">
               <label
@@ -70,8 +66,6 @@ const LoginPage = () => {
               required
             />
           </div>
-
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-lg"
