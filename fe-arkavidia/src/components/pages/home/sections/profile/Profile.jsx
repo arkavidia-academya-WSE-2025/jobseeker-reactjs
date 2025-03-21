@@ -10,10 +10,9 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // Ambil data lengkap profile jobseeker
+        // Ambil data profil lengkap dari endpoint jobseeker
         const response = await apiClient.get("/api/profile/jobseeker");
-        // response.data.data berisi:
-        // { id, user_id, photo_url, headline, created_at, updated_at }
+        // Contoh respons: { data: { id, user_id, photo_url, headline, created_at, updated_at } }
         setProfile(response.data.data);
       } catch (err) {
         console.error("Error fetching profile:", err);
@@ -50,7 +49,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-8">
       <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
-        {/* Tampilkan Foto Profil (jika ada) */}
+        {/* Tampilkan foto profil jika ada */}
         {profile.photo_url && (
           <div className="flex justify-center mb-4">
             <img

@@ -4,21 +4,22 @@ import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const [profile, setProfile] = useState({
-    photo_url: "",
     headline: "",
   });
+  const [photoFile, setPhotoFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Ambil data profile saat pertama kali render
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await apiClient.get("/api/profile/jobseeker");
         const { photo_url, headline } = response.data.data;
-        setProfile({ photo_url: photo_url || "", headline: headline || "" });
+        setProfile({ headline: headline || "" });
+        setPreviewUrl(photo_url || "");
       } catch (err) {
         console.error("Error fetching profile:", err);
         setError("Gagal mengambil data profil.");
@@ -30,6 +31,14 @@ const EditProfile = () => {
     fetchProfile();
   }, []);
 
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setPhotoFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   const handleInputChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
@@ -39,10 +48,19 @@ const EditProfile = () => {
     setSaving(true);
     setError(null);
     try {
-      // Kirim request PUT untuk memperbarui profile jobseeker
-      const response = await apiClient.put("/api/profile/jobseeker", profile);
+      const formData = new FormData();
+      formData.append("headline", profile.headline);
+      if (photoFile) {
+        formData.append("photo_url", photoFile);
+      }
+
+      const response = await apiClient.put("/api/profile/jobseeker", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       console.log("Profile updated:", response.data.data);
-      // Setelah update, redirect ke halaman profile
       navigate("/profile");
     } catch (err) {
       console.error("Error updating profile:", err);
@@ -69,25 +87,36 @@ const EditProfile = () => {
             {error}
           </div>
         )}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6"
+          encType="multipart/form-data"
+        >
           <div>
             <label
-              htmlFor="photo_url"
+              htmlFor="photo"
               className="block text-gray-700 font-medium mb-2"
             >
-              Photo URL
+              Upload Photo
             </label>
             <input
-              type="text"
-              name="photo_url"
-              id="photo_url"
-              value={profile.photo_url}
-              onChange={handleInputChange}
-              placeholder="Masukkan URL foto profil"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-              required
+              type="file"
+              name="photo"
+              id="photo"
+              onChange={handleFileChange}
+              accept="image/*"
+              className="w-full"
             />
           </div>
+          {previewUrl && (
+            <div className="mb-4">
+              <img
+                src={previewUrl}
+                alt="Preview"
+                className="w-32 h-32 object-cover rounded-full"
+              />
+            </div>
+          )}
           <div>
             <label
               htmlFor="headline"
