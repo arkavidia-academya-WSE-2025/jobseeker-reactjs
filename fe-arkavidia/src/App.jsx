@@ -11,6 +11,7 @@ import LoginPage from "./components/pages/auth/LoginPage";
 import SignUpPage from "./components/pages/auth/SignUpPage";
 import Profile from "./components/pages/home/sections/profile/Profile";
 import PrivateRoute from "./components/context/PrivateRoute";
+import EditProfile from "./components/pages/home/sections/profile/EditProfile";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/register" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route element={<PrivateRoute />}>
+              <Route path="editProfile" element={<EditProfile />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/notification" element={<NotificationPage />} />
