@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa6";
 import { LiaTimesSolid } from "react-icons/lia";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,15 +9,43 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [navLinks, setNavLinks] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const authToken = localStorage.getItem("authToken");
     setIsLoggedIn(!!authToken);
+    const userData = localStorage.getItem("userData")
+      ? JSON.parse(localStorage.getItem("userData"))
+      : null;
+
+    if (authToken && userData) {
+      if (userData.role === "job_seeker") {
+        setNavLinks([
+          { href: "/chatJob", label: "ChatJob" },
+          { href: "/feeds", label: "Feeds" },
+          { href: "/profile", label: "Profile" },
+          { href: "/findJobs", label: "Find Jobs" },
+        ]);
+      } else if (userData.role === "recruiter") {
+        setNavLinks([
+          { href: "/feeds", label: "Feeds" },
+          { href: "/profile", label: "Profile" },
+          { href: "/findJobs", label: "Find Jobs" },
+          { href: "/jobPosting", label: "Companies" },
+          { href: "/applications", label: "Applications" },
+        ]);
+      } else {
+        setNavLinks([]);
+      }
+    } else {
+      setNavLinks([]);
+    }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("userData");
     setIsLoggedIn(false);
     navigate("/login");
   };
@@ -29,12 +57,6 @@ const Navbar = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const navLinks = [
-    { href: "/findJobs", label: "Find Jobs" },
-    { href: "/jobPosting", label: "Companies" },
-    { href: "/feeds", label: "Feeds" },
-  ];
 
   return (
     <nav className="w-full h-[8ch] bg-neutral-50 flex items-center md:flex-row lg:px-32 md:px-16 sm:px-7 px-4 z-50 border-b border-neutral-200">
