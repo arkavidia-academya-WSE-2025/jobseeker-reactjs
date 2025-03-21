@@ -7,12 +7,16 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const userData = JSON.parse(localStorage.getItem("userData")) || {};
+  const isRecruiter = userData.role === "recruiter";
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // Ambil data profil lengkap dari endpoint jobseeker
-        const response = await apiClient.get("/api/profile/jobseeker");
-        // Contoh respons: { data: { id, user_id, photo_url, headline, created_at, updated_at } }
+        const endpoint = isRecruiter
+          ? "/api/profile/company"
+          : "/api/profile/jobseeker";
+        const response = await apiClient.get(endpoint);
         setProfile(response.data.data);
       } catch (err) {
         console.error("Error fetching profile:", err);
@@ -23,7 +27,7 @@ const Profile = () => {
     };
 
     fetchProfile();
-  }, []);
+  }, [isRecruiter]);
 
   if (loading) {
     return (
@@ -49,7 +53,6 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-8">
       <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
-        {/* Tampilkan foto profil jika ada */}
         {profile.photo_url && (
           <div className="flex justify-center mb-4">
             <img
@@ -65,7 +68,16 @@ const Profile = () => {
           </h2>
           <p className="mt-1 text-gray-700">ID: {profile.id}</p>
           <p className="mt-1 text-gray-700">User ID: {profile.user_id}</p>
-          <p className="mt-1 text-gray-700">Headline: {profile.headline}</p>
+          {isRecruiter ? (
+            <p className="mt-1 text-gray-700">
+              Description:{" "}
+              {profile.description ? profile.description : "Tidak tersedia"}
+            </p>
+          ) : (
+            <p className="mt-1 text-gray-700">
+              Headline: {profile.headline ? profile.headline : "Tidak tersedia"}
+            </p>
+          )}
           <p className="mt-1 text-gray-700">
             Dibuat: {new Date(profile.created_at).toLocaleString()}
           </p>

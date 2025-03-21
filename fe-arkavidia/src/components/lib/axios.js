@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://127.0.0.1:3000", // Ubah jika menggunakan proxy
+  baseURL: "http://127.0.0.1:3000",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -11,7 +11,6 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
-    // Jangan tambahkan token untuk login dan register
     const publicEndpoints = ["/api/users/login", "/api/users/register"];
     if (publicEndpoints.includes(config.url)) return config;
 
@@ -28,10 +27,9 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    // Jika respons 401 (Unauthorized), langsung redirect ke login
     if (error.response?.status === 401) {
-      // window.location.href = "/login";
-      // return Promise.reject(error);
+      window.location.href = "/login";
+      return Promise.reject(error);
     }
     if (error.code === "ERR_NETWORK") {
       console.error("Network Error:", error);

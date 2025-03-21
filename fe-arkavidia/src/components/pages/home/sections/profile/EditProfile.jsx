@@ -3,22 +3,33 @@ import apiClient from "../../../../../components/lib/axios";
 import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
-  const [profile, setProfile] = useState({
-    headline: "",
-  });
+  const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem("userData")) || {};
+  const isRecruiter = userData.role === "recruiter";
+
+  const [profile, setProfile] = useState(
+    isRecruiter ? { description: "" } : { headline: "" }
+  );
   const [photoFile, setPhotoFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await apiClient.get("/api/profile/jobseeker");
-        const { photo_url, headline } = response.data.data;
-        setProfile({ headline: headline || "" });
+        const endpoint = isRecruiter
+          ? "/api/profile/company"
+          : "/api/profile/jobseeker";
+        const response = await apiClient.get(endpoint);
+        const { photo_url } = response.data.data;
+
+        if (isRecruiter) {
+          setProfile({ description: response.data.data.description || "" });
+        } else {
+          setProfile({ headline: response.data.data.headline || "" });
+        }
         setPreviewUrl(photo_url || "");
       } catch (err) {
         console.error("Error fetching profile:", err);
@@ -29,7 +40,7 @@ const EditProfile = () => {
     };
 
     fetchProfile();
-  }, []);
+  }, [isRecruiter]);
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -49,12 +60,21 @@ const EditProfile = () => {
     setError(null);
     try {
       const formData = new FormData();
-      formData.append("headline", profile.headline);
+      // Append field berdasarkan role
+      if (isRecruiter) {
+        formData.append("description", profile.description);
+      } else {
+        formData.append("headline", profile.headline);
+      }
       if (photoFile) {
         formData.append("photo_url", photoFile);
       }
 
-      const response = await apiClient.put("/api/profile/jobseeker", formData, {
+      const updateEndpoint = isRecruiter
+        ? "/api/profile/company"
+        : "/api/profile/jobseeker";
+
+      const response = await apiClient.put(updateEndpoint, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -119,18 +139,22 @@ const EditProfile = () => {
           )}
           <div>
             <label
-              htmlFor="headline"
+              htmlFor={isRecruiter ? "description" : "headline"}
               className="block text-gray-700 font-medium mb-2"
             >
-              Headline
+              {isRecruiter ? "Description" : "Headline"}
             </label>
             <input
               type="text"
-              name="headline"
-              id="headline"
-              value={profile.headline}
+              name={isRecruiter ? "description" : "headline"}
+              id={isRecruiter ? "description" : "headline"}
+              value={isRecruiter ? profile.description : profile.headline}
               onChange={handleInputChange}
-              placeholder="Masukkan headline profil"
+              placeholder={
+                isRecruiter
+                  ? "Masukkan description profil"
+                  : "Masukkan headline profil"
+              }
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
               required
             />
