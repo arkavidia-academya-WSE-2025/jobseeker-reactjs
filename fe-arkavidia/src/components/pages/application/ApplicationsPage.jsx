@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../../../components/lib/axios";
+import { useNavigate } from "react-router-dom";
 
 const ApplicationsPage = () => {
   const [applications, setApplications] = useState([]);
   const [paging, setPaging] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const fetchApplications = async () => {
     setLoading(true);
@@ -67,13 +69,18 @@ const ApplicationsPage = () => {
                     <p>
                       <strong>Job Description:</strong> {app.job.description}
                     </p>
-                    <p>
-                      <strong>Job Location:</strong> {app.job.location}
-                    </p>
-                    <p>
-                      <strong>Salary:</strong> {app.job.salary}
-                    </p>
                   </div>
+                )}
+                {/* Tombol Chat: saat recruiter klik, navigasi ke /chat dan kirim data kontak (job_seeker) */}
+                {app.job_seeker && (
+                  <button
+                    className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
+                    onClick={() =>
+                      navigate("/chat", { state: { withUser: app.job_seeker } })
+                    }
+                  >
+                    Chat
+                  </button>
                 )}
               </li>
             ))}

@@ -11,10 +11,10 @@ import LoginPage from "./components/pages/auth/LoginPage";
 import SignUpPage from "./components/pages/auth/SignUpPage";
 import Profile from "./components/pages/home/sections/profile/Profile";
 import EditProfile from "./components/pages/home/sections/profile/EditProfile";
-import PrivateRoute from "./components/context/PrivateRoute";
-import RecruiterRoute from "./components/context/RecruiterRoute";
 import ApplicationsPage from "./components/pages/application/ApplicationsPage";
 import Dashboard from "./components/pages/dashboard/Dashboard";
+import PrivateRoute from "./components/context/PrivateRoute";
+import RecruiterRoute from "./components/context/RecruiterRoute";
 
 function App() {
   return (
