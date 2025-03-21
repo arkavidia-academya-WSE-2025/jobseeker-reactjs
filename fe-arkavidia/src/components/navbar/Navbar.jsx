@@ -12,15 +12,14 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Cek apakah user sudah login dengan melihat token di localStorage
     const authToken = localStorage.getItem("authToken");
     setIsLoggedIn(!!authToken);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken"); // Hapus token
+    localStorage.removeItem("authToken");
     setIsLoggedIn(false);
-    navigate("/login"); // Redirect ke halaman login
+    navigate("/login");
   };
 
   const handleClick = () => {
