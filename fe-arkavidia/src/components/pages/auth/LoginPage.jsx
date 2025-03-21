@@ -21,20 +21,27 @@ const LoginPage = () => {
     }
     setIsLoading(true);
     try {
-      const response = await apiClient.post("/api/users/login", {
+      // 1. Lakukan login untuk mendapatkan token
+      const loginResponse = await apiClient.post("/api/users/login", {
         email: formData.email,
         password: formData.password,
       });
-      // Mengambil token dari response.data.data.token sesuai respons Postman
-      const { token } = response.data.data;
+      const { token } = loginResponse.data.data;
       if (!token) {
         setError("Token tidak ditemukan pada response");
         return;
       }
-      // Simpan token langsung tanpa prefix "Bearer"
       localStorage.setItem("authToken", token);
-      // Karena backend tidak mengirim userData saat login,
-      // kita tidak menyimpan userData di sini.
+
+      // 2. Ambil data profile minimal (dari jobseeker)
+      const profileResponse = await apiClient.get("/api/profile/jobseeker");
+      const { user_id } = profileResponse.data.data;
+
+      // 3. Ambil data lengkap user (termasuk role) menggunakan user_id
+      const userResponse = await apiClient.get(`/api/users/${user_id}`);
+      const userData = userResponse.data.data;
+      localStorage.setItem("userData", JSON.stringify(userData));
+
       navigate("/");
     } catch (err) {
       console.error("Login error:", err);
