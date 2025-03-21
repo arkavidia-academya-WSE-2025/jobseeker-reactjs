@@ -7,7 +7,7 @@ import apiClient from "../../../../components/lib/axios";
 const JobSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("latest");
-  const [filters, setFilters] = useState({ location: "", category: "" });
+  const [filters, setFilters] = useState({ location: "" });
   const [jobs, setJobs] = useState([]);
   const [paging, setPaging] = useState(null);
   const [error, setError] = useState("");
