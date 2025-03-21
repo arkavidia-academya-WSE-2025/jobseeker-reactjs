@@ -9,6 +9,7 @@ import JobPostingForm from "./components/jobs/JobPosting/JobPostingForm";
 import JobApplicantsList from "./components/jobs/JobApplicants/JobApplicantsList";
 import LoginPage from "./components/pages/auth/LoginPage";
 import SignUpPage from "./components/pages/auth/SignUpPage";
+import Profile from "./components/pages/home/sections/profile/Profile";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/register" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/" element={<Home />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/notification" element={<NotificationPage />} />
