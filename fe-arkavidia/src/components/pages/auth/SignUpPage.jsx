@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import apiClient from "../../../components/lib/axios"; // pastikan import instance axios yang sudah dikonfigurasi
+import apiClient from "../../../components/lib/axios";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
@@ -11,14 +11,12 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validasi sederhana: cek apakah password dan confirmPassword sama
     if (password !== confirmPassword) {
       alert("Password dan konfirmasi password tidak cocok!");
       return;
     }
 
     try {
-      // Mengirim request POST ke endpoint register
       const response = await apiClient.post("/api/users/register", {
         username,
         email,
@@ -26,10 +24,8 @@ const SignUpPage = () => {
         role,
       });
       console.log("Pendaftaran berhasil:", response.data);
-      // Lakukan tindakan setelah pendaftaran (misalnya, redirect atau menampilkan pesan sukses)
     } catch (error) {
       console.error("Terjadi kesalahan saat pendaftaran:", error);
-      // Tampilkan pesan error kepada pengguna
     }
   };
 
@@ -163,7 +159,7 @@ const SignUpPage = () => {
           <p className="text-gray-600">
             Already have an account?{" "}
             <a
-              href="#"
+              href="/login"
               className="text-blue-600 hover:text-blue-700 font-medium underline underline-offset-2"
             >
               Login

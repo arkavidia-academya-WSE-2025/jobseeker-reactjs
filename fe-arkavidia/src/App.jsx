@@ -16,10 +16,7 @@ function App() {
     <>
       <Router>
         <main className="w-full min-h-screen flex flex-col bg-neutral-50 text-neutral-500">
-          {/* Navbar Section */}
           <Navbar />
-
-          {/* Routing */}
           <Routes>
             <Route path="/register" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -31,8 +28,6 @@ function App() {
             <Route path="/jobPosting" element={<JobPostingForm />} />
             <Route path="/jobApplicants" element={<JobApplicantsList />} />
           </Routes>
-
-          {/* Footer Section */}
           <Footer />
         </main>
       </Router>
