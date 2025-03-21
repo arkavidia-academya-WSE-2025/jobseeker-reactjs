@@ -4,7 +4,6 @@ import apiClient from "../../../components/lib/axios";
 
 const Chat = () => {
   const location = useLocation();
-  // Inisialisasi conversationWith dari state yang dikirim melalui navigate
   const initialContact = location.state?.withUser || null;
   const [conversationWith, setConversationWith] = useState(initialContact);
   const [messages, setMessages] = useState([]);
@@ -12,10 +11,8 @@ const Chat = () => {
   const [loadingConversation, setLoadingConversation] = useState(false);
   const [conversationError, setConversationError] = useState("");
 
-  // Ambil data user login
   const loggedUser = JSON.parse(localStorage.getItem("userData")) || {};
 
-  // Fungsi mengambil conversation dengan kontak tertentu
   const fetchConversation = async (withUserId) => {
     setLoadingConversation(true);
     setConversationError("");
@@ -34,7 +31,6 @@ const Chat = () => {
     }
   };
 
-  // Jika conversationWith sudah ada, ambil conversation
   useEffect(() => {
     if (conversationWith) {
       fetchConversation(conversationWith.id);
@@ -72,7 +68,6 @@ const Chat = () => {
         className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden max-w-4xl w-full mx-auto"
         style={{ height: "850px" }}
       >
-        {/* Header Chat */}
         <div className="p-4 border-b border-gray-200">
           {conversationWith ? (
             <div>
@@ -85,7 +80,6 @@ const Chat = () => {
             <h2 className="font-semibold text-sm">No conversation selected</h2>
           )}
         </div>
-        {/* Messages Area */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
           {loadingConversation ? (
             <p>Loading conversation...</p>
@@ -113,7 +107,6 @@ const Chat = () => {
             <p className="text-center text-gray-500">No messages yet.</p>
           )}
         </div>
-        {/* Message Input */}
         {conversationWith && (
           <div className="h-[80px] p-4 border-t border-gray-200">
             <div className="relative">

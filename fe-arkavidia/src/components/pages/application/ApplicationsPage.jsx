@@ -35,6 +35,16 @@ const ApplicationsPage = () => {
     fetchApplications();
   }, []);
 
+  // Fungsi untuk membuka chat dengan job_seeker dari aplikasi
+  const handleChatWithApplicant = (application) => {
+    // Ambil data job_seeker dari aplikasi
+    if (application.job_seeker) {
+      navigate("/chat", { state: { withUser: application.job_seeker } });
+    } else {
+      console.error("Data job_seeker tidak tersedia.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow">
@@ -71,13 +81,11 @@ const ApplicationsPage = () => {
                     </p>
                   </div>
                 )}
-                {/* Tombol Chat: saat recruiter klik, navigasi ke /chat dan kirim data kontak (job_seeker) */}
+                {/* Tombol Chat hanya muncul jika data job_seeker ada */}
                 {app.job_seeker && (
                   <button
+                    onClick={() => handleChatWithApplicant(app)}
                     className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
-                    onClick={() =>
-                      navigate("/chat", { state: { withUser: app.job_seeker } })
-                    }
                   >
                     Chat
                   </button>
