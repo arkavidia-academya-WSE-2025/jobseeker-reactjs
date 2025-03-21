@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import apiClient from "../../../components/lib/axios";
 
 const JobPostingForm = () => {
   const [formData, setFormData] = useState({
@@ -33,30 +34,26 @@ const JobPostingForm = () => {
     setError("");
 
     try {
-      const response = await fetch("/api/jobs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          salary: parseInt(formData.salary),
-        }),
-      });
+      const payload = {
+        ...formData,
+        salary: parseInt(formData.salary, 10),
+      };
+      const response = await apiClient.post("/api/jobs", payload);
 
-      if (!response.ok) {
+      if (response.data && response.data.data) {
+        console.log("Data berhasil dikirim!", response.data.data);
+        setFormData({
+          title: "",
+          description: "",
+          requirements: "",
+          location: "",
+          salary: "",
+        });
+      } else {
         throw new Error("Gagal mengirim data");
       }
-      setFormData({
-        title: "",
-        description: "",
-        requirements: "",
-        location: "",
-        salary: "",
-      });
-
-      console.log("Data berhasil dikirim!");
     } catch (err) {
+      console.error("Error submitting job posting:", err);
       setError(err.message);
     } finally {
       setIsSubmitting(false);
@@ -65,7 +62,6 @@ const JobPostingForm = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md m-10">
-      {" "}
       <h1 className="text-2xl font-bold mb-6 text-gray-800">
         Job Posting Form
       </h1>
@@ -74,9 +70,7 @@ const JobPostingForm = () => {
       )}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-2 gap-6">
-          {" "}
           <div className="col-span-2">
-            {" "}
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Job Title
             </label>
@@ -90,7 +84,6 @@ const JobPostingForm = () => {
             />
           </div>
           <div className="col-span-1">
-            {" "}
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Location
             </label>
@@ -143,7 +136,6 @@ const JobPostingForm = () => {
             />
           </div>
         </div>
-
         <button
           type="submit"
           disabled={isSubmitting}
