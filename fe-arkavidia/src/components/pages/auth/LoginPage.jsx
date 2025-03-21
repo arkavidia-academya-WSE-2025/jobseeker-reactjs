@@ -3,61 +3,39 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../../components/lib/axios";
 
 const LoginPage = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-
     if (!formData.email || !formData.password) {
       setError("Please fill in all fields");
       return;
     }
-
     setIsLoading(true);
-
     try {
       const response = await apiClient.post("/api/users/login", {
         email: formData.email,
         password: formData.password,
       });
-
-      localStorage.setItem("authToken", response.data.token);
-      localStorage.setItem(
-        "userData",
-        JSON.stringify({
-          id: response.data.id,
-          username: response.data.username,
-          email: response.data.email,
-          role: response.data.role,
-          is_premium: response.data.is_premium,
-          created_at: new Date(response.data.created_at).toLocaleDateString(),
-          updated_at: new Date(response.data.updated_at).toLocaleDateString(),
-        })
-      );
-      switch (response.data.role) {
-        case "admin":
-          navigate("/");
-          break;
-        case "premium":
-          navigate("/");
-          break;
-        default:
-          navigate(response.data.is_premium ? "/" : "/");
+      // Mengambil token dari response.data.data.token sesuai respons Postman
+      const { token } = response.data.data;
+      if (!token) {
+        setError("Token tidak ditemukan pada response");
+        return;
       }
+      // Simpan token langsung tanpa prefix "Bearer"
+      localStorage.setItem("authToken", token);
+      // Karena backend tidak mengirim userData saat login,
+      // kita tidak menyimpan userData di sini.
+      navigate("/");
     } catch (err) {
       console.error("Login error:", err);
       const errorMessage =
@@ -74,7 +52,6 @@ const LoginPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white flex items-center justify-center p-4 relative overflow-hidden">
       <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse"></div>
       <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse"></div>
-
       <div className="bg-white/90 backdrop-blur-sm border border-white/20 p-8 rounded-2xl shadow-xl w-full max-w-md relative z-10">
         <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">
           JobSync
@@ -82,13 +59,11 @@ const LoginPage = () => {
             Welcome Back
           </span>
         </h1>
-
         {error && (
           <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm">
             ⚠️ {error}
           </div>
         )}
-
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label
@@ -109,7 +84,6 @@ const LoginPage = () => {
               required
             />
           </div>
-
           <div>
             <div className="flex justify-between mb-2">
               <label
@@ -137,7 +111,6 @@ const LoginPage = () => {
               required
             />
           </div>
-
           <button
             type="submit"
             disabled={isLoading}
@@ -153,7 +126,6 @@ const LoginPage = () => {
             )}
           </button>
         </form>
-
         <div className="mt-6 text-center">
           <p className="text-gray-600">
             Don't Have Account?{" "}
