@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import apiClient from "../../../components/lib/axios";
+import apiClient from "../../lib/axios";
 
 const JobPostingForm = () => {
   const [formData, setFormData] = useState({

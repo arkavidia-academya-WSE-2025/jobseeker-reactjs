@@ -7,13 +7,13 @@ import Chat from "./components/pages/chat/Chat";
 import NotificationPage from "./components/pages/notifications/NotificationPage";
 import JobSearch from "./components/pages/home/jobs/JobSearch";
 import JobPostingForm from "./components/jobs/JobPosting/JobPostingForm";
-import JobApplicantsList from "./components/jobs/JobApplicants/JobApplicantsList";
 import LoginPage from "./components/pages/auth/LoginPage";
 import SignUpPage from "./components/pages/auth/SignUpPage";
 import Profile from "./components/pages/home/sections/profile/Profile";
 import EditProfile from "./components/pages/home/sections/profile/EditProfile";
 import PrivateRoute from "./components/context/PrivateRoute";
 import RecruiterRoute from "./components/context/RecruiterRoute";
+import ApplicationsPage from "./components/pages/application/ApplicationsPage";
 
 function App() {
   return (
@@ -30,9 +30,9 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/findJobs" element={<JobSearch />} />
-            <Route path="/jobApplicants" element={<JobApplicantsList />} />
             <Route element={<RecruiterRoute />}>
               <Route path="/jobPosting" element={<JobPostingForm />} />
+              <Route path="/applications" element={<ApplicationsPage />} />
             </Route>
           </Route>
         </Routes>
