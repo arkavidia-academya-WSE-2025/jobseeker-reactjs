@@ -32,7 +32,7 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "/findJobs", label: "Find Jobs" },
-    { href: "/companies", label: "Companies" },
+    { href: "/jobPosting", label: "Companies" },
     { href: "/dashboard", label: "Dashboard" },
   ];
 
