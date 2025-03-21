@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import apiClient from "../../../components/lib/axios";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
@@ -7,10 +8,25 @@ const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("job_seeker");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle signup logic here
-    console.log({ username, email, password, confirmPassword, role });
+
+    if (password !== confirmPassword) {
+      alert("Password dan konfirmasi password tidak cocok!");
+      return;
+    }
+
+    try {
+      const response = await apiClient.post("/api/users/register", {
+        username,
+        email,
+        password,
+        role,
+      });
+      console.log("Pendaftaran berhasil:", response.data);
+    } catch (error) {
+      console.error("Terjadi kesalahan saat pendaftaran:", error);
+    }
   };
 
   return (
@@ -32,7 +48,7 @@ const SignUpPage = () => {
               Register as:
             </label>
             <div className="flex gap-4">
-              <label className="flex items-center flex-1 bg-white p-2 rounded-lg border border-gray-200 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+              <label className="flex items-center flex-1 bg-white p-2 rounded-lg border border-gray-200 transition-all">
                 <input
                   type="radio"
                   name="role"
@@ -45,7 +61,7 @@ const SignUpPage = () => {
                 <span className="text-gray-700">Job Seeker</span>
               </label>
 
-              <label className="flex items-center flex-1 bg-white p-2 rounded-lg border border-gray-200 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
+              <label className="flex items-center flex-1 bg-white p-2 rounded-lg border border-gray-200 transition-all">
                 <input
                   type="radio"
                   name="role"
@@ -70,7 +86,7 @@ const SignUpPage = () => {
                 type="text"
                 id="username"
                 placeholder="Enter your username"
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 bg-white"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -88,7 +104,7 @@ const SignUpPage = () => {
                 type="email"
                 id="email"
                 placeholder="botaninfo@gmail.com"
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 bg-white"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -106,7 +122,7 @@ const SignUpPage = () => {
                 type="password"
                 id="password"
                 placeholder="Enter your password"
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 bg-white"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -124,7 +140,7 @@ const SignUpPage = () => {
                 type="password"
                 id="confirmPassword"
                 placeholder="Confirm your password"
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 bg-white"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
@@ -143,7 +159,7 @@ const SignUpPage = () => {
           <p className="text-gray-600">
             Already have an account?{" "}
             <a
-              href="#"
+              href="/login"
               className="text-blue-600 hover:text-blue-700 font-medium underline underline-offset-2"
             >
               Login

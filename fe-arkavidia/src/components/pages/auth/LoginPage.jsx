@@ -1,13 +1,73 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import apiClient from "../../../components/lib/axios";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log({ email, password });
+    setError("");
+
+    if (!formData.email || !formData.password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await apiClient.post("/api/users/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      localStorage.setItem("authToken", response.data.token);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          id: response.data.id,
+          username: response.data.username,
+          email: response.data.email,
+          role: response.data.role,
+          is_premium: response.data.is_premium,
+          created_at: new Date(response.data.created_at).toLocaleDateString(),
+          updated_at: new Date(response.data.updated_at).toLocaleDateString(),
+        })
+      );
+      switch (response.data.role) {
+        case "admin":
+          navigate("/");
+          break;
+        case "premium":
+          navigate("/");
+          break;
+        default:
+          navigate(response.data.is_premium ? "/" : "/");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      const errorMessage =
+        err.response?.data?.error ||
+        err.response?.data?.message ||
+        "Error logging in";
+      setError(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -23,7 +83,13 @@ const LoginPage = () => {
           </span>
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm">
+            ⚠️ {error}
+          </div>
+        )}
+
+        <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label
               htmlFor="email"
@@ -34,13 +100,16 @@ const LoginPage = () => {
             <input
               type="email"
               id="email"
-              placeholder="botaninfo@gmail.com"
-              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="example@email.com"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white disabled:bg-gray-100"
+              value={formData.email}
+              onChange={handleInputChange}
+              disabled={isLoading}
+              autoComplete="email"
               required
             />
           </div>
+
           <div>
             <div className="flex justify-between mb-2">
               <label
@@ -50,38 +119,49 @@ const LoginPage = () => {
                 Password
               </label>
               <a
-                href="#"
+                href="#lupa-password"
                 className="text-sm text-blue-600 hover:text-blue-700 font-medium underline underline-offset-2"
               >
-                Forgot?
+                Forgot Password?
               </a>
             </div>
             <input
               type="password"
               id="password"
-              placeholder="Enter your password"
-              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Fill in your password"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-white disabled:bg-gray-100"
+              value={formData.password}
+              onChange={handleInputChange}
+              disabled={isLoading}
+              autoComplete="current-password"
               required
             />
           </div>
+
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-lg"
+            disabled={isLoading}
+            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 shadow-lg disabled:opacity-75 disabled:cursor-not-allowed"
           >
-            Login Now
+            {isLoading ? (
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Loading..
+              </div>
+            ) : (
+              "Sign In Now"
+            )}
           </button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-gray-600">
-            Don't have an account?{" "}
+            Don't Have Account?{" "}
             <a
-              href="#"
+              href="/register"
               className="text-blue-600 hover:text-blue-700 font-medium underline underline-offset-2"
             >
-              Sign Up
+              Register Now!
             </a>
           </p>
         </div>
