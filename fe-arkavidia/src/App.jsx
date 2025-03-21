@@ -14,6 +14,7 @@ import EditProfile from "./components/pages/home/sections/profile/EditProfile";
 import PrivateRoute from "./components/context/PrivateRoute";
 import RecruiterRoute from "./components/context/RecruiterRoute";
 import ApplicationsPage from "./components/pages/application/ApplicationsPage";
+import Dashboard from "./components/pages/dashboard/Dashboard";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/findJobs" element={<JobSearch />} />
+            <Route path="/feeds" element={<Dashboard />} />
             <Route element={<RecruiterRoute />}>
               <Route path="/jobPosting" element={<JobPostingForm />} />
               <Route path="/applications" element={<ApplicationsPage />} />
