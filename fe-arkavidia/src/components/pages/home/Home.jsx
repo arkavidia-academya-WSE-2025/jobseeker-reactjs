@@ -1,7 +1,7 @@
 import React from "react";
-import Hero from "./hero/Hero";
-import NearbyJobs from "./nearbyjobs/NearbyJobs";
-import Jobs from "./jobs/Jobs";
+import Hero from "./sections/Hero";
+import NearbyJobs from "./sections/NearbyJobs";
+import Jobs from "./sections/Jobs";
 
 const Home = () => {
   return (
