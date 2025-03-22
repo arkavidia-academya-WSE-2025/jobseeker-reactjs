@@ -73,7 +73,6 @@ const JobSearch = () => {
       setJobs(sortedJobs);
       setPaging(pagingInfo);
     } catch (err) {
-      console.error("Error fetching jobs:", err);
       setError("Gagal mengambil data lowongan pekerjaan.");
     } finally {
       setIsLoading(false);
@@ -87,7 +86,6 @@ const JobSearch = () => {
       setShowDetailModal(true);
       setModalError("");
     } catch (err) {
-      console.error("Error fetching job detail:", err);
       setModalError("Gagal mengambil detail lowongan.");
       setShowDetailModal(true);
     }
@@ -119,7 +117,7 @@ const JobSearch = () => {
     setApplyError("");
     try {
       const token = localStorage.getItem("authToken");
-      const response = await apiClient.post(
+      await apiClient.post(
         "/api/applications",
         {
           full_name: applicationForm.full_name,
@@ -134,10 +132,8 @@ const JobSearch = () => {
           },
         }
       );
-      console.log("Application submitted:", response.data.data);
       setShowApplyModal(false);
     } catch (err) {
-      console.error("Error submitting application:", err);
       setApplyError("Gagal mengirim aplikasi.");
     } finally {
       setIsSubmittingApplication(false);
@@ -159,8 +155,10 @@ const JobSearch = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white p-6 relative overflow-hidden">
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse" />
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse" />
+      <div className="max-w-5xl w-full mx-auto bg-white/90 backdrop-blur-sm border border-white/20 p-6 rounded-2xl shadow-xl relative z-10">
         <h2 className="text-2xl font-bold mb-4">Search Jobs</h2>
         <div className="mb-4">
           <SearchBar

@@ -24,7 +24,6 @@ const ApplicationsPage = () => {
       setApplications(data);
       setPaging(pagingInfo);
     } catch (err) {
-      console.error("Error fetching applications:", err);
       setError("Gagal mengambil data aplikasi.");
     } finally {
       setLoading(false);
@@ -35,9 +34,7 @@ const ApplicationsPage = () => {
     fetchApplications();
   }, []);
 
-  // Fungsi untuk membuka chat dengan job_seeker dari aplikasi
   const handleChatWithApplicant = (application) => {
-    // Ambil data job_seeker dari aplikasi
     if (application.job_seeker) {
       navigate("/chat", { state: { withUser: application.job_seeker } });
     } else {
@@ -46,8 +43,10 @@ const ApplicationsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white p-6 relative overflow-hidden">
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse" />
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse" />
+      <div className="max-w-5xl w-full mx-auto bg-white/90 backdrop-blur-sm border border-white/20 p-6 rounded-2xl shadow-xl relative z-10">
         <h2 className="text-2xl font-bold mb-4">Applications</h2>
         {loading ? (
           <p className="text-center text-gray-500">Loading applications...</p>
@@ -56,9 +55,12 @@ const ApplicationsPage = () => {
         ) : applications.length === 0 ? (
           <p className="text-center text-gray-500">No applications found.</p>
         ) : (
-          <ul>
+          <ul className="space-y-4">
             {applications.map((app) => (
-              <li key={app.id} className="border p-4 mb-4 rounded">
+              <li
+                key={app.id}
+                className="border p-4 rounded bg-white shadow-sm"
+              >
                 <p>
                   <strong>Full Name:</strong> {app.full_name}
                 </p>
@@ -81,11 +83,10 @@ const ApplicationsPage = () => {
                     </p>
                   </div>
                 )}
-                {/* Tombol Chat hanya muncul jika data job_seeker ada */}
                 {app.job_seeker && (
                   <button
                     onClick={() => handleChatWithApplicant(app)}
-                    className="mt-2 bg-blue-500 text-white px-3 py-1 rounded"
+                    className="mt-2 bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors"
                   >
                     Chat
                   </button>
