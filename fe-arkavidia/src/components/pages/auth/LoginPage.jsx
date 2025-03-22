@@ -110,12 +110,6 @@ const LoginPage = () => {
               >
                 Password
               </label>
-              <a
-                href="#lupa-password"
-                className="text-sm text-blue-600 hover:text-blue-700 font-medium underline underline-offset-2"
-              >
-                Forgot Password?
-              </a>
             </div>
             <input
               type="password"

@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa6";
 import { GiPortal } from "react-icons/gi";
 import { FaGithub } from "react-icons/fa";
 
@@ -11,7 +10,6 @@ const Footer = () => {
       <Layout className="w-full space-y-10">
         <div className="grid md:grid-cols-5 grid-cols-2 gap-10">
           <div className="col-span-2 space-y-4">
-            {/* Logo Section */}
             <Link
               to="/"
               className="text-4xl text-sky-500 font-bold mr-16 flex items-center"
@@ -21,16 +19,13 @@ const Footer = () => {
             </Link>
             <div className="space-y-6">
               <p className="text-sm text-neutral-500 font-normal">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem
-                ipsum, dolor sit amet consectetur adipisicing elit. Libero, sit.
-                Maxime repellat adipisci quam quo laudantium repellendus impedit
-                eligendi assumenda. Lorem ipsum, dolor sit amet consectetur
-                adipisicing elit. Lorem, ipsum dolor sit amet consectetur
-                adipisicing elit. Quam, ab.
+                JobSync is a platform that connects job seekers with employers.
+                We are committed to ease the recruitment process and help job
+                seekers find the best career opportunities.
               </p>
               <div className="flex items-center gap-5 w-full">
                 <Link
-                  to="https://github.com/arkavidia-academya-WSE-2025"
+                  to="https://github.com/arkavidia-academya-WSE-2025/jobseeker-reactjs"
                   target="_blank"
                   className="w-10 h-10 rounded-full bg-sky-500/10 flex items-center justify-center hover:bg-sky-500/20 ease-in-out duration-300"
                 >
@@ -42,63 +37,23 @@ const Footer = () => {
 
           <div className="col-span-1 space-y-4">
             <h1 className="text-xl text-neutral-700 font-semibold">
-              For Candidate
+              For Job Seeker
             </h1>
             <ul className="space-y-3">
               <li>
                 <Link
-                  to="/cdashboard"
+                  to="/feeds"
                   className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
                 >
-                  Candidate Dashboard
+                  Feeds
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/jobs"
+                  to="/chatJob"
                   className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
                 >
-                  My Jobs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/account"
-                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
-                >
-                  My Account
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-span-1 space-y-4">
-            <h1 className="text-xl text-neutral-700 font-semibold">
-              For Employer
-            </h1>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  to="/jobs"
-                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
-                >
-                  Find Candidates
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/account"
-                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
-                >
-                  My Account
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/sjobs"
-                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
-                >
-                  Saved Candidates
+                  Chat
                 </Link>
               </li>
               <li>
@@ -109,52 +64,92 @@ const Footer = () => {
                   Profile
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/findJobs"
+                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
+                >
+                  Find Jobs
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-span-1 space-y-4">
+            <h1 className="text-xl text-neutral-700 font-semibold">
+              For Recruiter
+            </h1>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  to="/feeds"
+                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
+                >
+                  Feeds
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/profile"
+                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
+                >
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/jobPosting"
+                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
+                >
+                  Job Posting
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/applications"
+                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
+                >
+                  Applications
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div className="md:col-span-1 col-span-2 space-y-4">
             <h1 className="text-xl text-neutral-700 font-semibold">
-              About Companies
+              More Info
             </h1>
             <ul className="space-y-3">
               <li>
                 <Link
-                  to="/about"
+                  to="/notification"
                   className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
                 >
-                  About Company
+                  Notifications
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/terms"
+                  to="/login"
                   className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
                 >
-                  Term & Condition
+                  Login
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/policy"
+                  to="/register"
                   className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
                 >
-                  Privacy Policy
+                  Register
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/contact"
+                  to="/"
                   className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
                 >
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/faqs"
-                  className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
-                >
-                  FAQs
+                  Home
                 </Link>
               </li>
             </ul>
@@ -163,15 +158,17 @@ const Footer = () => {
 
         <div className="w-full h-[1px] bg-neutral-300"></div>
 
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0">
           <p className="text-sm text-neutral-500/80 font-normal">
-            Copyright © 2025. All rights reserved
+            © 2025 JobSync. All rights reserved.
           </p>
           <p className="text-sm text-neutral-500/80 font-normal">
-            Designed and Developed by
+            Designed and Developed by{" "}
             <Link
               to="https://github.com/arkavidia-academya-WSE-2025/jobseeker-reactjs"
-              className="text-sky-500 hover:text-sky-600 ease-in-out duration-300 ml-2"
+              className="text-sky-500 hover:text-sky-600 ease-in-out duration-300 ml-1"
+              target="_blank"
+              rel="noreferrer"
             >
               Group 5
             </Link>

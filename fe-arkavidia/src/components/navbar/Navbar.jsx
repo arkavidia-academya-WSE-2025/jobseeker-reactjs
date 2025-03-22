@@ -7,7 +7,6 @@ import { IoNotificationsOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [navLinks, setNavLinks] = useState([]);
   const navigate = useNavigate();
@@ -60,7 +59,6 @@ const Navbar = () => {
 
   return (
     <nav className="w-full h-[8ch] bg-neutral-50 flex items-center md:flex-row lg:px-32 md:px-16 sm:px-7 px-4 z-50 border-b border-neutral-200">
-      {/* Logo Section */}
       <Link
         to="/"
         className="text-2xl text-sky-500 font-bold mr-16 flex items-center"
@@ -68,7 +66,6 @@ const Navbar = () => {
         <GiPortal /> JobSync
       </Link>
 
-      {/* Toggle button */}
       <button
         onClick={handleClick}
         className="flex-1 lg:hidden text-neutral-600 ease-in-out duration-300 flex items-center justify-end"
@@ -102,34 +99,16 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-x-5 relative">
-          {/* Notification Icon */}
+          {/* Notification Icon (navigates to /notification) */}
           <button
             className="text-neutral-600 hover:text-sky-500 relative"
-            onClick={() => setShowNotifications(!showNotifications)}
+            onClick={() => navigate("/notification")}
           >
             <IoNotificationsOutline className="text-2xl" />
             <span className="absolute top-0 right-0 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
               3
             </span>
           </button>
-
-          {/* Notification Dropdown */}
-          {showNotifications && (
-            <div className="absolute top-10 right-0 w-64 bg-white shadow-md border border-neutral-200 rounded-md p-3">
-              <p className="text-sm text-neutral-500">Newest Notifications</p>
-              <ul className="mt-2 text-sm text-neutral-700">
-                <li className="p-2 border-b">New job posted</li>
-                <li className="p-2 border-b">Company viewed your profile</li>
-                <li className="p-2 border-b">Interview scheduled</li>
-              </ul>
-              <Link
-                to="/notification"
-                className="block text-center text-sky-500 hover:text-sky-600 text-sm mt-2"
-              >
-                View More
-              </Link>
-            </div>
-          )}
 
           {/* Sign In / Logout Button */}
           {isLoggedIn ? (
