@@ -43,7 +43,6 @@ const Dashboard = () => {
           Authorization: token,
         },
       });
-      console.log("Post created:", response.data.data);
       setNewPost({ title: "", content: "" });
       fetchPosts();
     } catch (err) {
@@ -55,10 +54,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse" />
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse" />
+      <div className="max-w-4xl w-full bg-white/90 backdrop-blur-sm border border-white/20 p-6 rounded-2xl shadow-xl relative z-10">
         <h1 className="text-3xl font-bold mb-6">Feeds</h1>
-
         <form onSubmit={handlePostSubmit} className="mb-6">
           <div className="mb-4">
             <input
@@ -80,7 +80,7 @@ const Dashboard = () => {
               className="w-full p-2 border rounded"
               rows={4}
               required
-            ></textarea>
+            />
           </div>
           <button
             type="submit"
@@ -90,9 +90,7 @@ const Dashboard = () => {
             {isPosting ? "Posting..." : "Post"}
           </button>
         </form>
-
         {error && <p className="text-red-500 mb-4">{error}</p>}
-
         {loading ? (
           <p>Loading posts...</p>
         ) : posts.length === 0 ? (
