@@ -2,22 +2,15 @@ import React, { useState, useEffect } from "react";
 import apiClient from "../../../components/lib/axios";
 
 const ChatJobSeeker = () => {
-  // Daftar kontak (recruiter) yang diambil dari lowongan
   const [contacts, setContacts] = useState([]);
-  // Kontak yang dipilih untuk percakapan
   const [conversationWith, setConversationWith] = useState(null);
-  // Percakapan pesan
   const [messages, setMessages] = useState([]);
-  // Input pesan baru
   const [newMessage, setNewMessage] = useState("");
-  // Loading dan error untuk percakapan
   const [loadingConversation, setLoadingConversation] = useState(false);
   const [conversationError, setConversationError] = useState("");
 
-  // Ambil data user login (job_seeker)
   const loggedUser = JSON.parse(localStorage.getItem("userData")) || {};
 
-  // Fungsi mengambil daftar lowongan dan ekstrak recruiter unik
   const fetchRecruiterContacts = async () => {
     try {
       const params = new URLSearchParams({
@@ -26,9 +19,7 @@ const ChatJobSeeker = () => {
       });
       const response = await apiClient.get(`/api/jobs?${params.toString()}`);
       const jobs = response.data.data || [];
-      // Ekstrak recruiter dari tiap job
       const recruiters = jobs.map((job) => job.recruiter);
-      // Deduplicate berdasarkan recruiter.id
       const uniqueRecruiters = [];
       recruiters.forEach((r) => {
         if (r && !uniqueRecruiters.find((u) => u.id === r.id)) {
@@ -45,7 +36,6 @@ const ChatJobSeeker = () => {
     fetchRecruiterContacts();
   }, []);
 
-  // Fungsi mengambil conversation dengan kontak tertentu
   const fetchConversation = async (withUserId) => {
     setLoadingConversation(true);
     setConversationError("");
@@ -73,7 +63,7 @@ const ChatJobSeeker = () => {
     if (!newMessage.trim() || !conversationWith) return;
     try {
       const token = localStorage.getItem("authToken");
-      const response = await apiClient.post(
+      await apiClient.post(
         "/api/messages",
         {
           receiver_id: conversationWith.id,
@@ -86,7 +76,6 @@ const ChatJobSeeker = () => {
           },
         }
       );
-      console.log("Message sent:", response.data.data);
       setNewMessage("");
       fetchConversation(conversationWith.id);
     } catch (err) {
@@ -95,20 +84,17 @@ const ChatJobSeeker = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-4 min-h-screen">
-      <div
-        className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden flex"
-        style={{ height: "850px" }}
-      >
-        {/* Left Container - Kontak */}
-        <div className="w-80 border-r border-gray-200 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse" />
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse" />
+      <div className="max-w-5xl w-full bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row relative z-10 min-h-[70vh]">
+        <div className="w-full md:w-80 border-r border-gray-200 flex flex-col">
           <div className="p-4 border-b border-gray-200">
             <h3 className="text-lg font-semibold">Recruiters</h3>
             <input
               type="text"
               placeholder="Search recruiters..."
               className="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm"
-              // onChange bisa ditambahkan untuk filter dinamis
             />
           </div>
           <div className="flex-1 overflow-y-auto">
@@ -139,9 +125,8 @@ const ChatJobSeeker = () => {
             </div>
           </div>
         </div>
-        {/* Right Container - Chat Area */}
-        <div className="flex-1 flex flex-col max-w-[600px]">
-          {/* Header */}
+
+        <div className="flex-1 flex flex-col bg-white/90 backdrop-blur-sm border border-white/20 p-6 rounded-r-2xl shadow-xl">
           <div className="p-4 border-b border-gray-200">
             {conversationWith ? (
               <div>
@@ -156,8 +141,7 @@ const ChatJobSeeker = () => {
               </h2>
             )}
           </div>
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 rounded-lg">
             {loadingConversation ? (
               <p className="text-center text-gray-500">
                 Loading conversation...
@@ -186,7 +170,6 @@ const ChatJobSeeker = () => {
               <p className="text-center text-gray-500">No messages yet.</p>
             )}
           </div>
-          {/* Input Pesan */}
           {conversationWith && (
             <div className="p-4 border-t border-gray-200">
               <div className="relative">
