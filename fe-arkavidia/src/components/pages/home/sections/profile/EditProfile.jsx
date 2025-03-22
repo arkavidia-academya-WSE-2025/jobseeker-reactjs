@@ -32,13 +32,11 @@ const EditProfile = () => {
         }
         setPreviewUrl(photo_url || "");
       } catch (err) {
-        console.error("Error fetching profile:", err);
         setError("Gagal mengambil data profil.");
       } finally {
         setLoading(false);
       }
     };
-
     fetchProfile();
   }, [isRecruiter]);
 
@@ -60,7 +58,6 @@ const EditProfile = () => {
     setError(null);
     try {
       const formData = new FormData();
-      // Append field berdasarkan role
       if (isRecruiter) {
         formData.append("description", profile.description);
       } else {
@@ -69,21 +66,16 @@ const EditProfile = () => {
       if (photoFile) {
         formData.append("photo_url", photoFile);
       }
-
       const updateEndpoint = isRecruiter
         ? "/api/profile/company"
         : "/api/profile/jobseeker";
-
-      const response = await apiClient.put(updateEndpoint, formData, {
+      await apiClient.put(updateEndpoint, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
-      console.log("Profile updated:", response.data.data);
       navigate("/profile");
     } catch (err) {
-      console.error("Error updating profile:", err);
       setError("Gagal memperbarui profil.");
     } finally {
       setSaving(false);
@@ -92,15 +84,19 @@ const EditProfile = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <p className="text-gray-700 text-lg">Loading profile...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-white p-4 relative overflow-hidden">
+        <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse" />
+        <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse" />
+        <p className="text-gray-700 text-lg z-10">Loading profile...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="max-w-xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse" />
+      <div className="absolute w-96 h-96 bg-blue-200/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse" />
+      <div className="max-w-xl w-full bg-white/90 backdrop-blur-sm border border-white/20 p-6 rounded-2xl shadow-xl relative z-10">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">Edit Profile</h2>
         {error && (
           <div className="mb-4 p-3 bg-red-100 text-red-700 rounded text-sm">
