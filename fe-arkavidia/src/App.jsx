@@ -21,6 +21,7 @@ import Dashboard from "./components/pages/dashboard/Dashboard";
 import PrivateRoute from "./components/context/PrivateRoute";
 import RecruiterRoute from "./components/context/RecruiterRoute";
 import ChatJobSeeker from "./components/pages/chat/ChatJobSeeker";
+import ScrollToTop from "./components/scroll/ScrollToTop";
 
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -37,6 +38,7 @@ const Layout = ({ children }) => {
 function App() {
   return (
     <Router>
+      <ScrollToTop />{" "}
       <Layout>
         <main className="w-full min-h-screen flex flex-col bg-neutral-50 text-neutral-500">
           <Routes>

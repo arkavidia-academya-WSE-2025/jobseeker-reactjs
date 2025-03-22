@@ -1,5 +1,13 @@
 import React from "react";
 
+const topicsData = [
+  "Remote Work",
+  "Software Development",
+  "UI/UX Design",
+  "Data Science",
+  "Cyber Security",
+];
+
 const Topics = () => {
   return (
     <div className="space-y-3">
@@ -7,18 +15,14 @@ const Topics = () => {
         Trending Topics
       </h1>
       <ul className="space-y-2">
-        <li className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300">
-          Topic 1
-        </li>
-        <li className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300">
-          Topic 2
-        </li>
-        <li className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300">
-          Topic 3
-        </li>
-        <li className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300">
-          Topic 4
-        </li>
+        {topicsData.map((topic, index) => (
+          <li
+            key={index}
+            className="text-base text-neutral-600 font-medium hover:text-sky-500 ease-in-out duration-300"
+          >
+            {topic}
+          </li>
+        ))}
       </ul>
     </div>
   );

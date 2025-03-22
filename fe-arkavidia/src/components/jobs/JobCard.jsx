@@ -113,9 +113,6 @@ const JobCard = ({
               Adobe IL
             </Link>
           </div> */}
-          <button className="px-5 py-2 rounded-full bg-sky-500 hover:bg-sky-600 text-sm text-neutral-50 font-normal flex items-center justify-center gap-x-2 ease-in-out duration-300">
-            Apply Now
-          </button>
         </div>
       </div>
     </div>
